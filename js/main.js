@@ -30,11 +30,12 @@ const getData = category => {
     .then (response => response.json())
     .then (resData => {
         let {results} = resData
-        let movies = (e) => results.map(e => apiMovieToMovie(e))
+        let movies = results.map(e => apiMovieToMovie(e))
         printResults(movies)
     })
 };
 
+getData('popular')
 
 //TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
 const apiMovieToMovie = apiMovie => {
@@ -61,20 +62,21 @@ const release */
 /* const infoToShow = (title, img) => {
      title = e.title
      img = e.img
-}*/
+}
 
-const popularMovies = getData('popular'); 
+const popularMovies = getData('popular'); */
 
 
 const printResults = (param) => {
     let containerPopular = document.getElementById('popular-movies');
     containerPopular.innerHTML = '';
+
+    param.forEach((e) => {
     let movie= document.createElement('li');
-    movie.innerText = param;
+    movie.innerText = (e.title, e.img);
     containerPopular.appendChild(movie);
+    });
 }
-
-
 
 
  
