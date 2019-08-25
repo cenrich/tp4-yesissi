@@ -53,7 +53,17 @@ const apiMovieToMovie = apiMovie => {
     return movie
 }
 
-//mostrar los resultados en pantalla: crear un nodo con la seccion/crear un elemento 'a'/ apendear mi resultado al nodo (necesito pasarle un parámetro para que tome 'movies' de get data y que ese sea mi resultado a mostrar)
+/* const apiMovieToModal = apiMovie => {
+    let {id, title, img, overview, genre_ids, release_date} = apiMovie
+    let modal = {
+        id: id,
+        title: title, 
+        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
+        overview: overview, 
+        genre: gendre_ids[],
+        release: release_date, 
+} */
+
 
 //INFORMACION DE LA PELICULA
 /* const showTitle = arr => (arr.map(e => e.title))
@@ -78,8 +88,14 @@ const printResults = (param) => {
     containerPopular.innerHTML = '';
 
     param.forEach((e) => {
-    let movie= document.createElement('li');
-    movie.innerText = `${e.title} ${e.img}`
+    let movie = document.createElement('a');
+    let image = document.createElement('img');
+    image.innerText = `${e.img}`
+    movie.innerText = `${e.title}`;
+    image.src = `${e.img}`;
+    movie.href = '#';
+   // movie.onclick = 
+    containerPopular.appendChild(image);
     containerPopular.appendChild(movie);
     });
 }
