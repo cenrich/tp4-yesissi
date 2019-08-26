@@ -1,13 +1,6 @@
 const api_key = 'd25219b09e23f4a8cbeed6c5ebe7ac2a'
 let lastRequest;
 
-//const img = document.getElementById('holi') 
-/* const popularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`
-const topRatedMovies = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}`
-const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}`
-const nowPlayingMovies = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}` */
-
-
 const onLoad = () => {
    // search();
     getData();
@@ -23,12 +16,8 @@ const onLoad = () => {
         .then(response =>  response.json())
         .then( resSearch => console.log(resSearch.results));
     }
-};
+}; */
 
-console.log(search()) */
-
-
-const img = document.createElement('img')
     
 //FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
 const getData = category => {
@@ -64,25 +53,7 @@ const apiMovieToMovie = apiMovie => {
         release: release_date, 
 } */
 
-
-//INFORMACION DE LA PELICULA
-/* const showTitle = arr => (arr.map(e => e.title))
-const showId = arr => console.log(arr.map(e => e.id))
-const showImg = (arr, img) => {
-    arr.map(e => img.src = `https://image.tmdb.org/t/p/w500/${e.poster_path}`)
-    }  */
-/* const overview
-const genero
-const release */
-   
-/* const infoToShow = (title, img) => {
-     title = e.title
-     img = e.img
-}
-
-const popularMovies = getData('popular'); */
-
-
+//FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 
 const printResults = (param) => {
     let containerPopular = document.getElementById('movies');
     containerPopular.innerHTML = '';
@@ -94,7 +65,6 @@ const printResults = (param) => {
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
     movie.href = '#';
-   // movie.onclick = 
     containerPopular.appendChild(image);
     containerPopular.appendChild(movie);
     });
