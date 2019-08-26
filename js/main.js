@@ -2,7 +2,7 @@ const api_key = 'd25219b09e23f4a8cbeed6c5ebe7ac2a'
 let lastRequest;
 
 const onLoad = () => {
-   // search();
+   searchMovie();
     getData();
  } 
 
@@ -55,20 +55,43 @@ const apiMovieToMovie = apiMovie => {
 
 //FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 
 const printResults = (param) => {
-    let containerPopular = document.getElementById('movies');
+    // let containerPopular = document.createElement('li');
+    // containerPopular.id('movies')
+    // let li = document.createElement('li')
+    // li.appendChild(containerPopular);
+    containerPopular= document.getElementById('popular-movies')
     containerPopular.innerHTML = '';
 
     param.forEach((e) => {
+    // let li = document.createElement('li');
+    // li.appendChild(containerPopular)
+    var element1 = document.createElement("li");
     let movie = document.createElement('a');
     let image = document.createElement('img');
     image.innerText = `${e.img}`
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
     movie.href = '#';
-    containerPopular.appendChild(image);
-    containerPopular.appendChild(movie);
+    containerPopular.appendChild(element1);
+    element1.appendChild(image);
+    element1.appendChild(movie);
     });
+
 }
+
+const searchMovie = () => {
+    let input = document.getElementById('search')
+    let content = input.value
+    if (content !== ''){
+        input.value = ''
+        getData()
+    }
+}
+
+var keyPress=function(event){
+    event.keyCode === 13 ? searchMovie() : false
+}
+
 
 
  
