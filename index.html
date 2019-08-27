@@ -21,7 +21,7 @@
                 <li class='nav-item' >
                     <a href="index.html" class="nav-link" onclick="getData('popular')">
                         <div class="image-container" id="popular" >
-                                <div class="svg"><i class="far fa-star"></i></div>
+                                <div class="svg"><i class="fas fa-star"></i></div>
                             <span class="title-popular">POPULAR</span>
                         </div>
                     </a>
@@ -37,7 +37,7 @@
                 <li class='nav-item'>
                     <a href="#" class="nav-link" onclick="getData('upcoming')">
                         <div class="image-container">
-                            <div class="svg"><i class="far fa-calendar-times"></i></div>
+                            <div class="svg"><i class="fas fa-search"></i></div>
                             <span class="title-upcoming">UPCOMING</span>
                         </div>
                     </a>
@@ -45,7 +45,7 @@
                 <li class='nav-item'>
                     <a href="#" class="nav-link" onclick="getData('now_playing')">
                         <div class="image-container">
-                            <div class="svg"><i class="far fa-play-circle"></i></div>
+                            <div class="svg"><i class="fas fa-play"></i></div>
                             <span class="title-nowplaying">NOW PLAYING</span>
                         </div>
                     </a>
@@ -55,51 +55,60 @@
         <header class="search">
             <div class="image-container">
                 <div class="search-icon"><i class="fas fa-search"></i></div>
-                <input type="text" placeholder="Search for a movie..." class="search-input"  id="search" onkeypress="keyPress()">
+                <input type="text" placeholder="Search for a movie..." class="search-input"  id="searchInput" onfocus="this.value=''" onkeyup="searchFunction()"
+                >
             </div>
         </header>
-        <section class="main">
+        <section id="resultsContainer" class="bigContainer">
+        </section>
+        <section id="mainContainer" class="main">
             <section class="home">
                 <header class="main-header">
                     <h1>Letterboxd</h1>
                 </header>
-                <!-- Estás son todas las pelis -->
                 <div class="movies-container">
                     <div class="movie-section">
                         <header class="movies-header">
                             <h2>Popular</h2>
                             <a href="#" class="view-all">View All</a>
                         </header>
-                        <ul id="popular-movies">
-                            <!-- esta es la estructura que queremos en el js -->
-                            <!-- <li id="movies">
-                                <a href="link que abre modal">
-                                    <img src="" alt="">
-                                    <p>Título de la peli</p>
-                                </a>
-                            </li> -->
+                        <ul class="movies-list" id="popular-movies">
                         </ul>
-                    </div>
-                    <!-- <div class="movies" id="movies">
                         <header class="movies-header">
                             <h2>Top Rated</h2>
                             <a href="#" class="view-all">View All</a>
                         </header>
-                    </div>
-                    <div class="movies" id="movies">
+                        <ul class="movies-list" id="top-movies">
+                        </ul>
                         <header class="movies-header">
                             <h2>Upcoming</h2>
                             <a href="#" class="view-all">View All</a>
                         </header>
-                    </div>
-                    <div class="movies" id="movies">
+                        <ul class="movies-list" id="upcoming-movies">
+                        </ul>
                         <header class="movies-header">
                             <h2>Now Playing</h2>
                             <a href="#" class="view-all">View All</a>
                         </header>
-                    </div> -->
+                        <ul class="movies-list" id="playing-movies">
+                        </ul>
+                    </div>
                 </div>
             </section>
+        </section>
+
+        <!-- esta section tiene que mostrarse cuando pones el view all o la opcion del menu de la seccion, si no se ve el home -->
+        <section id="categoriesContainer">
+            <div class="movies-container">
+                <div class="movie-section">
+                    <header class="movies-header">
+                        <!-- este titulo te lo tiene que poner el js -->
+                        <h2>Popular</h2>
+                    </header>
+                    <ul id="movies">
+                    </ul>
+                </div>
+            </div>
         </section>
     </div>
 </body>
