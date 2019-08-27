@@ -242,17 +242,21 @@ const loadMore = (query,currentPage) => {
 // - Mobile
 
 const printHome = (param, category) => {
-    let containerPopular = document.getElementById('movies');
+    let containerPopular = document.getElementById('popular-movies');
     containerPopular.innerHTML = '';
 
     param.forEach((e) => {
+
+    var element1 = document.createElement("li");
     let movie = document.createElement('a');
     let image = document.createElement('img');
-    image.innerText = `${e.img}`
+    image.innerText = `${e.img}`;
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
     movie.href = '#';
-    containerPopular.appendChild(image);
-    containerPopular.appendChild(movie);
+    containerPopular.appendChild(element1);
+    element1.appendChild(image);
+    element1.appendChild(movie);
+    
     });
 }
