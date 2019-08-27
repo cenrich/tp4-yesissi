@@ -215,5 +215,3 @@ const loadMore = (query,currentPage) => {
 // - En el search que muestre las imágenes
 // - Modal
 // - Mobile
- 
-
