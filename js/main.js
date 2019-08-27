@@ -28,6 +28,11 @@ const homePage = () => {
     getHome('now_playing')
 }
 
+let popular = getHome('popular')
+let topRated = getHome('top_rated')
+let upcoming =  getHome('upcoming')
+let nowPlaying = getHome('now_playing')
+
 
 //FUNCION DE BUSCAR 
 /* const search = () => {
@@ -101,8 +106,10 @@ const printResults = (param) => {
 
 
 const printHome = (param) => {
-    let containerPopular = document.getElementById('movies');
-    containerPopular.innerHTML = '';
+    let homePopular = document.getElementById('homePopular');
+    homePopular.innerHTML = '';
+    let homeTopRated = document.getElementById('homeTopRated');
+    homeTopRated.innerHTML = '';
 
     param.forEach((e) => {
     let movie = document.createElement('a');
@@ -111,8 +118,10 @@ const printHome = (param) => {
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
     movie.href = '#';
-    containerPopular.appendChild(image);
-    containerPopular.appendChild(movie);
+    homePopular.appendChild(image);
+    homePopular.appendChild(movie);
+    homeTopRated.appendChild(image);
+    homeTopRated.appendChild(movie);
     });
 
 }
