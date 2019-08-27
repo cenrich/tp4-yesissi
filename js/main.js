@@ -17,8 +17,7 @@ const getHome = category => {
         let {results} = resData
         resData.filter
         let movies = results.map(e=> apiMovieToMovie(e))
-        printHome(movies.filter((e,i)=>i<5))  
-        console.log(movies)
+        printHome(movies.filter((e,i)=>i<5)) 
     });
 };
 
@@ -28,6 +27,7 @@ const homePage = () => {
     getHome('upcoming')
     getHome('now_playing')
 }
+
 
 //FUNCION DE BUSCAR 
 /* const search = () => {
@@ -100,7 +100,7 @@ const printResults = (param) => {
 
 
 
-const printHome = (param, category) => {
+const printHome = (param) => {
     let containerPopular = document.getElementById('movies');
     containerPopular.innerHTML = '';
 
@@ -114,4 +114,5 @@ const printHome = (param, category) => {
     containerPopular.appendChild(image);
     containerPopular.appendChild(movie);
     });
+
 }
