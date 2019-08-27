@@ -1,16 +1,44 @@
 const api_key = 'd25219b09e23f4a8cbeed6c5ebe7ac2a'
 let lastRequest;
+let i = []
 
 const onLoad = () => {
 
+    homePage();
+    getHome();
     getData();
- } 
+ }
 
+//HOME 
+
+const getHome = category => {
+    fetch (`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
+    .then (response => response.json())
+    .then (resData => {
+        let {results} = resData
+        resData.filter
+        let movies = results.map(e=> apiMovieToMovie(e))
+        printHome(movies.filter((e,i)=>i<5))  
+        console.log(movies)
+    });
+};
+
+const homePage = () => {
+    getHome('popular')
+    getHome('top_rated')
+    getHome('upcoming')
+    getHome('now_playing')
+}
 
 const clearAll = () => {
     document.getElementById("mainContainer").classList.add("hide")
     document.getElementById("resultsContainer").classList.add("hide")
 }
+
+//FUNCION IMPRIMIR RESULTADO DE SEARCH EN EL HOME
+
+
+
 
     
 //FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
@@ -20,18 +48,15 @@ const getData = category => {
     .then (resData => {
         let {results} = resData
         let movies = results.map(e => apiMovieToMovie(e))
-        // printResults(movies)
-        printPopular(movies)
-        printTop(movies)
-        printUpcoming(movies)
-        printPlaying(movies)
-    })
+        printResults(movies)
+    });
 };
 
 getData('popular')
 getData('top_rated')
 getData('upcoming')
 getData('now_playing')
+
 
 
 //TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
@@ -215,3 +240,19 @@ const loadMore = (query,currentPage) => {
 // - En el search que muestre las imágenes
 // - Modal
 // - Mobile
+
+const printHome = (param, category) => {
+    let containerPopular = document.getElementById('movies');
+    containerPopular.innerHTML = '';
+
+    param.forEach((e) => {
+    let movie = document.createElement('a');
+    let image = document.createElement('img');
+    image.innerText = `${e.img}`
+    movie.innerText = `${e.title}`;
+    image.src = `${e.img}`;
+    movie.href = '#';
+    containerPopular.appendChild(image);
+    containerPopular.appendChild(movie);
+    });
+}
