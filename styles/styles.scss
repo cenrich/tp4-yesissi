@@ -99,6 +99,7 @@ video {
   width: 95px;
   height: 100vh;
   z-index: 999;
+  background-color: white;
 
   .logo {
     background-color: $ada-pink;
@@ -169,6 +170,7 @@ video {
   width: 100vw;
   height: 75px;
   margin-left: 95px;
+  z-index: 9999;
 
   .image-container {
     position: relative;
@@ -181,17 +183,18 @@ video {
       position: absolute;
       top: 50%;
       margin-top: -10px;
-      left: 20px;
+      left: 60px;
     }
 
     input {
       border: none;
-      padding: 28px 30px 28px 60px;
+      padding: 28px 30px 28px 90px;
       font-family: $font;
       font-size: 16px;
       font-weight: lighter;
-      width: 75%;
+      width: calc(100% - 110px);
       color: $grey;
+      outline: none;
 
       &:hover {
         color: $ada-pink;
@@ -248,10 +251,11 @@ video {
   height: 100vh;
 
   .movie-section {
+    background-color: #f6f6f6;
     .movies-header {
       overflow: hidden;
       line-height: 35px;
-
+      padding: 0 20px;
       h2 {
         font-size: 18px;
         margin: 10px 0;
@@ -272,7 +276,7 @@ video {
         }
       }
     }
-    #popular-movies {
+    .movies-list {
       display: flex;
       flex-wrap: wrap;
       align-content: space-between;
@@ -289,13 +293,46 @@ video {
             float: left;
             width: 100%;
             cursor: pointer;
+            transition: 0.5s ease;
         }
         a{
-          font-size: 18px;
-          color: $black;
+          font-size: 14px;
+          color: $darkgrey;
+          margin: 1rem 0;
+          position: relative;
+          float: left;
+          width: 100%;
           text-decoration: none;
+          transition: 0.5s ease;
+          
+        }
+        &:hover{
+          img{
+            box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
+            transform: scale(1.02);
+            transition: 0.5s ease;
+          }
+          a{
+            color: $black;
+            transition: 0.5s ease;
+          }
         }
       }
     }
   }
+}
+
+#resultsContainer{
+    button{
+        position: relative;
+        float: right;
+    }
+}
+
+.display{
+  display: block;
+}
+
+.hide{
+  display: none;
 }
