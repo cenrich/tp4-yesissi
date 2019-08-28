@@ -89,11 +89,6 @@ video {
   vertical-align: baseline;
 }
 
-.container {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .nav {
   position: fixed;
   width: 95px;
@@ -110,6 +105,14 @@ video {
 
     img {
       width: 35px;
+      transition: 0.2s;
+    }
+
+    &:hover{
+        img{
+            transform: scale(1.02);
+            transition: 0.2s;
+        }
     }
   }
 
@@ -119,43 +122,32 @@ video {
       height: 95px;
       text-decoration: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       border-bottom: 1px solid #f8f8f8;
 
-      &:hover .title-popular {
+      span {
+        font-size: 9px;
+        margin-top: 10px;
+        color: $darkgrey;
+        font-weight: lighter;
+        letter-spacing: 0.5px;
+        transition: 0.2s;
+      }
+      .fas {
         color: $ada-pink;
+        transition: 0.2s;
       }
 
-      &:hover .title-toprated {
-        color: $ada-pink;
-      }
-
-      &:hover .title-nowplaying {
-        color: $ada-pink;
-      }
-
-      &:hover .title-upcoming {
-        color: $ada-pink;
-      }
-
-      .image-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        img {
-          width: 26px;
-          height: 26px;
-          fill: $ada-pink;
-        }
-
+      &:hover {
         span {
-          font-size: 9px;
-          margin-top: 10px;
-          color: $ada-pink;
-          font-weight: lighter;
-          letter-spacing: 0.5px;
+          color: lighten($color: $ada-pink, $amount: 20%);
+          transition: 0.2s;
+        }
+        .fas {
+          color: lighten($color: $ada-pink, $amount: 20%);
+          transition: 0.2s;
         }
       }
     }

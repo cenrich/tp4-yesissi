@@ -87,11 +87,6 @@ video {
   vertical-align: baseline;
 }
 
-.container {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .nav {
   position: fixed;
   width: 95px;
@@ -108,44 +103,41 @@ video {
 }
 .nav .logo img {
   width: 35px;
+  transition: 0.2s;
+}
+.nav .logo:hover img {
+  transform: scale(1.02);
+  transition: 0.2s;
 }
 .nav .nav-list .nav-link {
   width: 95px;
   height: 95px;
   text-decoration: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #f8f8f8;
 }
-.nav .nav-list .nav-link:hover .title-popular {
-  color: #BC3B68;
-}
-.nav .nav-list .nav-link:hover .title-toprated {
-  color: #BC3B68;
-}
-.nav .nav-list .nav-link:hover .title-nowplaying {
-  color: #BC3B68;
-}
-.nav .nav-list .nav-link:hover .title-upcoming {
-  color: #BC3B68;
-}
-.nav .nav-list .nav-link .image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.nav .nav-list .nav-link .image-container img {
-  width: 26px;
-  height: 26px;
-  fill: #BC3B68;
-}
-.nav .nav-list .nav-link .image-container span {
+.nav .nav-list .nav-link span {
   font-size: 9px;
   margin-top: 10px;
-  color: #BC3B68;
+  color: #4d4d4d;
   font-weight: lighter;
   letter-spacing: 0.5px;
+  transition: 0.2s;
+}
+.nav .nav-list .nav-link .fas {
+  color: #BC3B68;
+  transition: 0.2s;
+}
+.nav .nav-list .nav-link:hover span {
+  color: #d984a2;
+  transition: 0.2s;
+}
+.nav .nav-list .nav-link:hover .fas {
+  color: #d984a2;
+  transition: 0.2s;
 }
 
 .search {
