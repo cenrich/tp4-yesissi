@@ -140,21 +140,16 @@ video {
   transition: 0.2s;
 }
 
-.main-container {
-  position: relative;
-  float: left;
-  width: calc(100% - 95px);
-  margin-left: 95px;
-  margin-top: 75px;
-}
-
 .search {
   position: fixed;
   left: 95px;
-  width: 100%;
+  width: calc(100% - 95px);
   height: 75px;
   z-index: 9999;
   background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 .search .fas {
   position: absolute;
@@ -166,27 +161,27 @@ video {
 }
 .search input {
   border: none;
-  padding: 28px 30px 28px 90px;
+  padding: 15px 30px 15px 90px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: lighter;
-  width: calc(100% - 110px);
+  width: 100%;
   outline: none;
   color: #4d4d4d;
+  box-sizing: border-box;
 }
 .search input::placeholder {
   color: #c7c7c7;
 }
 
-.main {
-  padding: 75px 0 0;
+.main-container {
+  position: relative;
+  float: left;
+  width: calc(100% - 95px);
   margin-left: 95px;
-  height: 100vh;
+  margin-top: 75px;
 }
-.main .home {
-  height: inherit;
-}
-.main .home .main-header {
+.main-container #home .main-header {
   height: 384px;
   width: 100%;
   display: flex;
@@ -198,7 +193,7 @@ video {
   background-size: cover;
   position: relative;
 }
-.main .home .main-header::before {
+.main-container #home .main-header::before {
   content: "";
   position: absolute;
   top: 0;
@@ -207,34 +202,36 @@ video {
   height: 100%;
   background: rgba(247, 247, 247, 0.7);
 }
-.main .home h1 {
+.main-container #home h1 {
   font-size: 26px;
   letter-spacing: 0.5px;
   font-weight: 500;
   z-index: 999;
   color: #BC3B68;
 }
-
-.movies-container {
-  background-color: #ffffff;
-  height: 100vh;
-}
-.movies-container .movies-header {
-  overflow: hidden;
-  line-height: 35px;
-  padding: 0 20px;
+.main-container .movies-container {
   position: relative;
   float: left;
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fafafa;
 }
-.movies-container .movies-header h2 {
+.main-container .movies-container .movies-header {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.main-container .movies-container .movies-header h2 {
   font-size: 18px;
   margin: 10px 0;
   font-weight: 300;
   float: left;
   color: #BC3B68;
 }
-.movies-container .movies-header .view-all {
+.main-container .movies-container .movies-header .view-all {
   font-size: 12px;
   font-weight: 300;
   float: right;
@@ -242,32 +239,33 @@ video {
   text-decoration: none;
   color: #BC3B68;
 }
-.movies-container .movies-header .view-all:hover {
+.main-container .movies-container .movies-header .view-all:hover {
   color: #BC3B68;
 }
-.movies-container .movies-list {
+.main-container .movies-container .movies-list {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
   position: relative;
   float: left;
 }
-.movies-container .movies-list li {
+.main-container .movies-container .movies-list li {
   list-style: none;
   flex: auto;
   width: 20%;
   padding: 20px;
   box-sizing: border-box;
   justify-content: space-evenly;
+  cursor: pointer;
 }
-.movies-container .movies-list li img {
+.main-container .movies-container .movies-list li img {
   position: relative;
   float: left;
   width: 100%;
   cursor: pointer;
   transition: 0.5s ease;
 }
-.movies-container .movies-list li a {
+.main-container .movies-container .movies-list li a {
   font-size: 14px;
   color: #4d4d4d;
   margin: 1rem 0;
@@ -277,12 +275,12 @@ video {
   text-decoration: none;
   transition: 0.5s ease;
 }
-.movies-container .movies-list li:hover img {
+.main-container .movies-container .movies-list li:hover img {
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
   transition: 0.5s ease;
 }
-.movies-container .movies-list li:hover a {
+.main-container .movies-container .movies-list li:hover a {
   color: #333333;
   transition: 0.5s ease;
 }

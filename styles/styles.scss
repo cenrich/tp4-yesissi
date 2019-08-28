@@ -155,20 +155,16 @@ video {
 }
 
 // HEADER
-.main-container {
-  position: relative;
-  float: left;
-  width: calc(100% - 95px);
-  margin-left: 95px;
-  margin-top: 75px;
-}
 .search {
   position: fixed;
   left: 95px;
-  width: 100%;
+  width: calc(100% - 95px);
   height: 75px;
   z-index: 9999;
   background-color: $white;
+  display: flex;
+  align-items: center;
+  align-content: center;
 
   .fas {
     position: absolute;
@@ -181,29 +177,29 @@ video {
 
   input {
     border: none;
-    padding: 28px 30px 28px 90px;
+    padding: 15px 30px 15px 90px;
     font-family: $font;
     font-size: 16px;
     font-weight: lighter;
-    width: calc(100% - 110px);
+    width: 100%;
     outline: none;
     color: $darkgrey;
-    &::placeholder{
-        color: $grey;
+    box-sizing: border-box;
+    &::placeholder {
+      color: $grey;
     }
   }
 }
 
 // HOME
 
-.main {
-  padding: 75px 0 0;
+.main-container {
+  position: relative;
+  float: left;
+  width: calc(100% - 95px);
   margin-left: 95px;
-  height: 100vh;
-
-  .home {
-    height: inherit;
-
+  margin-top: 75px;
+  #home {
     .main-header {
       height: 384px;
       width: 100%;
@@ -234,86 +230,90 @@ video {
       color: $ada-pink;
     }
   }
-}
 
-// MOVIES
-.movies-container {
-  background-color: $white;
-  height: 100vh;
-
-  .movies-header {
-    overflow: hidden;
-    line-height: 35px;
-    padding: 0 20px;
+  // MOVIES
+  .movies-container {
     position: relative;
     float: left;
     width: 100%;
-    h2 {
-      font-size: 18px;
-      margin: 10px 0;
-      font-weight: 300;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: $lightgrey;
+    .movies-header {
+      position: relative;
       float: left;
-      color: $ada-pink;
-    }
-    .view-all {
-      font-size: 12px;
-      font-weight: 300;
-      float: right;
-      line-height: 50px;
-      text-decoration: none;
-      color: $ada-pink;
-
-      &:hover {
-        color: $ada-pink;
-      }
-    }
-  }
-  .movies-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-between;
-    position: relative;
-    float: left;
-
-    li {
-      list-style: none;
-      flex: auto;
-      width: 20%;
+      width: 100%;
       padding: 20px;
       box-sizing: border-box;
-      justify-content: space-evenly;
-      img {
-        position: relative;
+      h2 {
+        font-size: 18px;
+        margin: 10px 0;
+        font-weight: 300;
         float: left;
-        width: 100%;
-        cursor: pointer;
-        transition: 0.5s ease;
+        color: $ada-pink;
       }
-      a {
-        font-size: 14px;
-        color: $darkgrey;
-        margin: 1rem 0;
-        position: relative;
-        float: left;
-        width: 100%;
+      .view-all {
+        font-size: 12px;
+        font-weight: 300;
+        float: right;
+        line-height: 50px;
         text-decoration: none;
-        transition: 0.5s ease;
+        color: $ada-pink;
+  
+        &:hover {
+          color: $ada-pink;
+        }
       }
-      &:hover {
+    }
+    .movies-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+      position: relative;
+      float: left;
+  
+      li {
+        list-style: none;
+        flex: auto;
+        width: 20%;
+        padding: 20px;
+        box-sizing: border-box;
+        justify-content: space-evenly;
+        cursor: pointer;
         img {
-          box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
-          transform: scale(1.02);
+          position: relative;
+          float: left;
+          width: 100%;
+          cursor: pointer;
           transition: 0.5s ease;
         }
         a {
-          color: $black;
+          font-size: 14px;
+          color: $darkgrey;
+          margin: 1rem 0;
+          position: relative;
+          float: left;
+          width: 100%;
+          text-decoration: none;
           transition: 0.5s ease;
         }
+        &:hover {
+          img {
+            box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
+            transform: scale(1.02);
+            transition: 0.5s ease;
+          }
+          a {
+            color: $black;
+            transition: 0.5s ease;
+          }
+        }
+        
       }
     }
   }
+  
 }
-
 #resultsContainer {
   button {
     position: relative;
