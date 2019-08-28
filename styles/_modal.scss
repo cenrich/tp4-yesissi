@@ -1,0 +1,48 @@
+#modalContainer {
+    display:none;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 99;
+    #modalBackground {
+        width:100vw;
+        height:100vh;
+        background-color: rgba(255, 255, 255, 0.322);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        #modal {
+            width:45%;
+            #upperModal {
+                background-color: $black;
+                padding: 2%;
+                a{
+                    float: right;
+                    color: $white;
+                }
+                h2{
+                    color: $ada-pink;
+                }
+                #img-modal{
+                 width: 150px;   
+                }
+            }
+            
+            #lowerModal {
+                background-color:$darkgrey;
+                padding: 2%;
+                .movieDetails{
+                    margin-right: 5%;
+                      .modalTitle{
+                    padding:10px;
+                    color:$ada-pink;
+
+                    }
+                 p{
+                     color:$white;
+                 }   
+                }
+            }
+        }
+    }
+}

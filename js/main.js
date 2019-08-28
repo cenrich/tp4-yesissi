@@ -90,10 +90,10 @@ const printResults = (param) => {
     let li = document.createElement('li');
     let movie = document.createElement('a');
     let image = document.createElement('img');
+    li.onclick = () => toggleFunction() //definir el id con los results para info modal y pasarlo como parametro de esta funcion
     image.innerText = `${e.img}`
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
-    movie.href = '#';
     containerPopular.appendChild(li);
     li.appendChild(image);
     li.appendChild(movie);
@@ -115,10 +115,41 @@ const printHome = (param) => {
         image.innerText = `${e.img}`
         movie.innerText = `${e.title}`;
         image.src = `${e.img}`;
-        movie.href = '#';
+        li.onclick = () => toggleFunction()
         containerPopular.appendChild(li);
         li.appendChild(image);
         li.appendChild(movie);
     });
 
 }
+
+// modal
+const loadModal = (movieId) => {
+	fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`)
+		.then(response => response.json())
+		.then(res => {
+			const mainTitleNode = document.getElementById("mainTitle")
+			mainTitleNode.innerText = res.title
+			document.getElementById("img-modal").src = `https://image.tmdb.org/t/p/w500${res.poster_path}`
+			const descriptionNode = document.getElementById("movieDescription")
+			descriptionNode.innerText = res.overview
+			const genreNode = document.getElementById("genre")
+			const genreList = []
+			res.genres.forEach(({
+				name
+			}) => genreList.push(name))
+			genreNode.innerText = genreList.join(", ")
+			const releaseDateNode = document.getElementById("releaseDate")
+			releaseDateNode.innerText = res.release_date
+		})
+}
+const toggleFunction = (movieId) => {
+	var modal = document.getElementById("modalContainer");
+	if (modal.style.display === "none") {
+		loadModal(movieId)
+		modal.style.display = "block";
+	} else {
+		modal.style.display = "none";
+	}
+}
+

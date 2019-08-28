@@ -1,3 +1,50 @@
+#modalContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+#modalContainer #modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.322);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#modalContainer #modalBackground #modal {
+  width: 45%;
+}
+#modalContainer #modalBackground #modal #upperModal {
+  background-color: #333333;
+  padding: 2%;
+}
+#modalContainer #modalBackground #modal #upperModal a {
+  float: right;
+  color: #ffffff;
+}
+#modalContainer #modalBackground #modal #upperModal h2 {
+  color: #BC3B68;
+}
+#modalContainer #modalBackground #modal #upperModal #img-modal {
+  width: 150px;
+}
+#modalContainer #modalBackground #modal #lowerModal {
+  background-color: #4d4d4d;
+  padding: 2%;
+}
+#modalContainer #modalBackground #modal #lowerModal .movieDetails {
+  margin-right: 5%;
+}
+#modalContainer #modalBackground #modal #lowerModal .movieDetails .modalTitle {
+  padding: 10px;
+  color: #BC3B68;
+}
+#modalContainer #modalBackground #modal #lowerModal .movieDetails p {
+  color: #ffffff;
+}
+
 html,
 body,
 div,
