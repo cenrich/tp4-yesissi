@@ -105,13 +105,13 @@ video {
 
     img {
       width: 35px;
-      transition: 0.2s;
+      transition: $transition;
     }
 
     &:hover {
       img {
         transform: scale(1.02);
-        transition: 0.2s;
+        transition: $transition;
       }
     }
   }
@@ -133,21 +133,21 @@ video {
         color: $darkgrey;
         font-weight: lighter;
         letter-spacing: 0.5px;
-        transition: 0.2s;
+        transition: $transition;
       }
       .fas {
         color: $ada-pink;
-        transition: 0.2s;
+        transition: $transition;
       }
 
       &:hover {
         span {
-          color: lighten($color: $ada-pink, $amount: 20%);
-          transition: 0.2s;
+          color: $lighter-pink;
+          transition: $transition;
         }
         .fas {
-          color: lighten($color: $ada-pink, $amount: 20%);
-          transition: 0.2s;
+          color: $lighter-pink;
+          transition: $transition;
         }
       }
     }
@@ -259,9 +259,9 @@ video {
         line-height: 50px;
         text-decoration: none;
         color: $ada-pink;
-  
+
         &:hover {
-          color: $ada-pink;
+          color: $lighter-pink;
         }
       }
     }
@@ -271,7 +271,7 @@ video {
       align-content: space-between;
       position: relative;
       float: left;
-  
+
       li {
         list-style: none;
         flex: auto;
@@ -285,34 +285,33 @@ video {
           float: left;
           width: 100%;
           cursor: pointer;
-          transition: 0.5s ease;
+          transition: $transition;;
         }
         a {
           font-size: 14px;
           color: $darkgrey;
+          opacity: 0.5;
           margin: 1rem 0;
           position: relative;
           float: left;
           width: 100%;
           text-decoration: none;
-          transition: 0.5s ease;
+          transition: $transition;;
         }
         &:hover {
           img {
             box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
             transform: scale(1.02);
-            transition: 0.5s ease;
+            transition: $transition;;
           }
           a {
-            color: $black;
-            transition: 0.5s ease;
+            opacity: 1;
+            transition: $transition;;
           }
         }
-        
       }
     }
   }
-  
 }
 #resultsContainer {
   button {
