@@ -14,37 +14,42 @@
 </head>
 
 <body onload="onLoad()">
-    <nav class="nav">
+    <nav id="nav" class="nav">
         <a href="#" class="logo" onclick="homePage()">
             <img src="images/iso_blanco_transparent.svg" alt="Ada">
         </a>
         <ul class="nav-list">
             <li class='nav-item'>
-                <a href="#" class="nav-link" onclick="getData('popular')">
+                <a href="#" class="nav-link" onclick="getData('popular'), toggleMenu()">
                     <i class="fas fa-star"></i>
                     <span class="nav-item-title">POPULAR</span>
                 </a>
             </li>
             <li class='nav-item'>
-                <a href="#" class="nav-link" onclick="getData('top_rated')">
+                <a href="#" class="nav-link" onclick="getData('top_rated'), toggleMenu()">
                     <i class="fas fa-arrow-up"></i>
                     <span class="nav-item-title">TOP RATED</span>
                 </a>
             </li>
             <li class='nav-item'>
-                <a href="#" class="nav-link" onclick="getData('upcoming')">
+                <a href="#" class="nav-link" onclick="getData('upcoming'), toggleMenu()">
                     <i class="fas fa-calendar"></i>
                     <span class="nav-item-title">UPCOMING</span>
                 </a>
             </li>
             <li class='nav-item'>
-                <a href="#" class="nav-link" onclick="getData('now_playing')">
+                <a href="#" class="nav-link" onclick="getData('now_playing'), toggleMenu()">
                     <i class="fas fa-play"></i>
                     <span class="nav-item-title">NOW PLAYING</span>
                 </a>
             </li>
         </ul>
     </nav>
+    <div onclick="toggleMenu()" id="hamburger" class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
     <header class="search">
         <i class="fas fa-search"></i>
         <input type="text" placeholder="Search for a movie..." class="search-input" onkeyup="search()">

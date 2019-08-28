@@ -140,6 +140,10 @@ video {
   transition: 0.5s ease;
 }
 
+.hamburger {
+  display: none;
+}
+
 .search {
   position: fixed;
   left: 95px;
@@ -154,7 +158,7 @@ video {
 .search .fas {
   position: absolute;
   top: 50%;
-  margin-top: -10px;
+  transform: translate(0, -50%);
   left: 60px;
   color: #c7c7c7;
   font-size: 20px;
@@ -180,8 +184,10 @@ video {
   width: calc(100% - 95px);
   margin-left: 95px;
   margin-top: 75px;
+  background-color: #fafafa;
 }
-.main-container #home .main-header {
+
+#home .main-header {
   height: 384px;
   width: 100%;
   display: flex;
@@ -193,7 +199,7 @@ video {
   background-size: cover;
   position: relative;
 }
-.main-container #home .main-header::before {
+#home .main-header::before {
   content: "";
   position: absolute;
   top: 0;
@@ -202,36 +208,36 @@ video {
   height: 100%;
   background: rgba(247, 247, 247, 0.7);
 }
-.main-container #home h1 {
+#home h1 {
   font-size: 26px;
   letter-spacing: 0.5px;
   font-weight: 500;
   z-index: 999;
   color: #BC3B68;
 }
-.main-container .movies-container {
-  position: relative;
-  float: left;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #fafafa;
-}
-.main-container .movies-container .movies-header {
+
+.movies-container {
   position: relative;
   float: left;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
 }
-.main-container .movies-container .movies-header h2 {
+.movies-container .movies-header {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.movies-container .movies-header h2 {
   font-size: 18px;
   margin: 10px 0;
   font-weight: 300;
   float: left;
   color: #BC3B68;
 }
-.main-container .movies-container .movies-header .view-all {
+.movies-container .movies-header .view-all {
   font-size: 12px;
   font-weight: 300;
   float: right;
@@ -239,17 +245,17 @@ video {
   text-decoration: none;
   color: #BC3B68;
 }
-.main-container .movies-container .movies-header .view-all:hover {
+.movies-container .movies-header .view-all:hover {
   color: #d984a2;
 }
-.main-container .movies-container .movies-list {
+.movies-container .movies-list {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
   position: relative;
   float: left;
 }
-.main-container .movies-container .movies-list li {
+.movies-container .movies-list li {
   list-style: none;
   flex: auto;
   width: 20%;
@@ -258,14 +264,14 @@ video {
   justify-content: space-evenly;
   cursor: pointer;
 }
-.main-container .movies-container .movies-list li img {
+.movies-container .movies-list li img {
   position: relative;
   float: left;
   width: 100%;
   cursor: pointer;
   transition: 0.5s ease;
 }
-.main-container .movies-container .movies-list li a {
+.movies-container .movies-list li a {
   font-size: 14px;
   color: #4d4d4d;
   opacity: 0.5;
@@ -276,27 +282,135 @@ video {
   text-decoration: none;
   transition: 0.5s ease;
 }
-.main-container .movies-container .movies-list li:hover img {
+.movies-container .movies-list li:hover img {
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
   transition: 0.5s ease;
 }
-.main-container .movies-container .movies-list li:hover a {
+.movies-container .movies-list li:hover a {
   opacity: 1;
   transition: 0.5s ease;
 }
 
-#resultsContainer button {
-  position: relative;
-  float: right;
+@media screen and (max-width: 1024px) {
+  .movies-container .movies-list li {
+    width: 50%;
+  }
 }
+@media screen and (max-width: 768px) {
+  .nav {
+    height: auto;
+    width: 100%;
+  }
+  .nav .nav-list {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: white;
+    list-style: none;
+  }
+  .nav .nav-list .nav-item {
+    float: left;
+    text-align: center;
+    width: 50%;
+  }
+  .nav .nav-list .nav-item .nav-link {
+    width: 100%;
+    border-right: 1px solid #f8f8f8;
+  }
+  .nav .logo {
+    height: 50px;
+    width: 50px;
+  }
+  .nav .logo img {
+    width: 25px;
+  }
 
-.display {
-  display: block;
-}
+  .nav-mobile {
+    z-index: 9998;
+  }
+  .nav-mobile .nav-list {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s ease;
+  }
 
-.hide {
-  display: none;
+  .search {
+    left: 50px;
+    width: calc(100% - 50px);
+    height: 50px;
+  }
+  .search input {
+    padding: 15px 50px 15px 45px;
+  }
+  .search .fas {
+    left: 15px;
+    font-size: 16px;
+  }
+
+  .main-container {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 50px;
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    width: 55px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: #fff;
+    z-index: 99999;
+    border-left: 1px solid #f8f8f8;
+  }
+  .hamburger .bar {
+    position: absolute;
+    width: 23px;
+    height: 1px;
+    background: rgba(8, 28, 36, 0.5);
+    transition: all 0.3s ease;
+  }
+  .hamburger .bar:first-child {
+    left: 16px;
+    top: 17px;
+  }
+  .hamburger .bar:nth-child(2) {
+    left: 16px;
+    top: 25px;
+  }
+  .hamburger .bar:nth-child(2):after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 23px;
+    height: 1px;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+  .hamburger .bar:nth-child(3) {
+    right: 15px;
+    top: 33px;
+  }
+  .hamburger.hamburger-active .bar:nth-child(3) {
+    width: 0;
+  }
+  .hamburger.hamburger-active .bar:first-child {
+    width: 0;
+  }
+  .hamburger.hamburger-active .bar:nth-child(2) {
+    transform: rotate(-45deg);
+  }
+  .hamburger.hamburger-active .bar:nth-child(2):after {
+    transform: rotate(-90deg);
+    background: rgba(8, 28, 36, 0.5);
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

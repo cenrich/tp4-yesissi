@@ -153,7 +153,9 @@ video {
     }
   }
 }
-
+.hamburger {
+  display: none;
+}
 // HEADER
 .search {
   position: fixed;
@@ -169,7 +171,7 @@ video {
   .fas {
     position: absolute;
     top: 50%;
-    margin-top: -10px;
+    transform: translate(0, -50%);
     left: 60px;
     color: $grey;
     font-size: 20px;
@@ -199,131 +201,245 @@ video {
   width: calc(100% - 95px);
   margin-left: 95px;
   margin-top: 75px;
-  #home {
-    .main-header {
-      height: 384px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: url("../images/batman.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(247, 247, 247, 0.7);
-      }
-    }
+  background-color: $lightgrey;
+}
 
-    h1 {
-      font-size: 26px;
-      letter-spacing: 0.5px;
-      font-weight: 500;
-      z-index: 999;
-      color: $ada-pink;
+#home {
+  .main-header {
+    height: 384px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/batman.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(247, 247, 247, 0.7);
     }
   }
 
-  // MOVIES
-  .movies-container {
+  h1 {
+    font-size: 26px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    z-index: 999;
+    color: $ada-pink;
+  }
+}
+
+// MOVIES
+.movies-container {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  .movies-header {
     position: relative;
     float: left;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: $lightgrey;
-    .movies-header {
-      position: relative;
+    h2 {
+      font-size: 18px;
+      margin: 10px 0;
+      font-weight: 300;
       float: left;
-      width: 100%;
+      color: $ada-pink;
+    }
+    .view-all {
+      font-size: 12px;
+      font-weight: 300;
+      float: right;
+      line-height: 50px;
+      text-decoration: none;
+      color: $ada-pink;
+
+      &:hover {
+        color: $lighter-pink;
+      }
+    }
+  }
+  .movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    position: relative;
+    float: left;
+
+    li {
+      list-style: none;
+      flex: auto;
+      width: 20%;
       padding: 20px;
       box-sizing: border-box;
-      h2 {
-        font-size: 18px;
-        margin: 10px 0;
-        font-weight: 300;
+      justify-content: space-evenly;
+      cursor: pointer;
+      img {
+        position: relative;
         float: left;
-        color: $ada-pink;
-      }
-      .view-all {
-        font-size: 12px;
-        font-weight: 300;
-        float: right;
-        line-height: 50px;
-        text-decoration: none;
-        color: $ada-pink;
-
-        &:hover {
-          color: $lighter-pink;
-        }
-      }
-    }
-    .movies-list {
-      display: flex;
-      flex-wrap: wrap;
-      align-content: space-between;
-      position: relative;
-      float: left;
-
-      li {
-        list-style: none;
-        flex: auto;
-        width: 20%;
-        padding: 20px;
-        box-sizing: border-box;
-        justify-content: space-evenly;
+        width: 100%;
         cursor: pointer;
+        transition: $transition;
+      }
+      a {
+        font-size: 14px;
+        color: $darkgrey;
+        opacity: 0.5;
+        margin: 1rem 0;
+        position: relative;
+        float: left;
+        width: 100%;
+        text-decoration: none;
+        transition: $transition;
+      }
+      &:hover {
         img {
-          position: relative;
-          float: left;
-          width: 100%;
-          cursor: pointer;
-          transition: $transition;;
+          box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
+          transform: scale(1.02);
+          transition: $transition;
         }
         a {
-          font-size: 14px;
-          color: $darkgrey;
-          opacity: 0.5;
-          margin: 1rem 0;
-          position: relative;
-          float: left;
-          width: 100%;
-          text-decoration: none;
-          transition: $transition;;
-        }
-        &:hover {
-          img {
-            box-shadow: 2px 2px 7px rgba($color: #000000, $alpha: 0.2);
-            transform: scale(1.02);
-            transition: $transition;;
-          }
-          a {
-            opacity: 1;
-            transition: $transition;;
-          }
+          opacity: 1;
+          transition: $transition;
         }
       }
     }
   }
 }
-#resultsContainer {
-  button {
-    position: relative;
-    float: right;
+
+@media screen and (max-width: 1024px) {
+  .movies-container {
+    .movies-list {
+      li {
+        width: 50%;
+      }
+    }
   }
 }
 
-.display {
-  display: block;
-}
+@media screen and (max-width: 768px) {
+  .nav {
+    height: auto;
+    width: 100%;
+    .nav-list {
+      visibility: hidden;
+      opacity: 0;
+      transition: $transition;
+      position: fixed;
+      width: 100%;
+      height: calc(100vh - 50px);
+      background-color: white;
+      list-style: none;
+      .nav-item {
+        float: left;
+        text-align: center;
+        width: 50%;
 
-.hide {
-  display: none;
+        .nav-link {
+          width: 100%;
+          border-right: 1px solid #f8f8f8;
+        }
+      }
+    }
+    .logo {
+      height: 50px;
+      width: 50px;
+      img {
+        width: 25px;
+      }
+    }
+  }
+  .nav-mobile {
+    z-index: 9998;
+    .nav-list {
+      visibility: visible;
+      opacity: 1;
+      transition: $transition;
+    }
+  }
+  .search {
+    left: 50px;
+    width: calc(100% - 50px);
+    height: 50px;
+    input {
+      padding: 15px 50px 15px 45px;
+    }
+    .fas {
+      left: 15px;
+      font-size: 16px;
+    }
+  }
+  .main-container {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 50px;
+  }
+  .hamburger {
+    display: block;
+    position: fixed;
+    width: 55px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: #fff;
+    z-index: 99999;
+    border-left: 1px solid #f8f8f8;
+    .bar {
+      position: absolute;
+      width: 23px;
+      height: 1px;
+      background: rgba(8, 28, 36, 0.5);
+      transition: all 0.3s ease;
+      &:first-child {
+        left: 16px;
+        top: 17px;
+      }
+      &:nth-child(2) {
+        left: 16px;
+        top: 25px;
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 23px;
+          height: 1px;
+          background: transparent;
+          transition: all 0.3s ease;
+        }
+      }
+      &:nth-child(3) {
+        right: 15px;
+        top: 33px;
+      }
+    }
+    &.hamburger-active {
+      .bar {
+        &:nth-child(3) {
+          width: 0;
+        }
+        &:first-child {
+          width: 0;
+        }
+        &:nth-child(2) {
+          transform: rotate(-45deg);
+          &:after {
+            transform: rotate(-90deg);
+            background: rgba(8, 28, 36, 0.5);
+          }
+        }
+      }
+    }
+  }
 }
