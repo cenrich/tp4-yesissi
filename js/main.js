@@ -18,6 +18,7 @@ const getHome = category => {
         resData.filter
         let movies = results.map(e=> apiMovieToMovie(e))
         printHome(movies.filter((e,i)=>i<5)) 
+        console.log(movies)
     });
 };
 
@@ -27,12 +28,6 @@ const homePage = () => {
     getHome('upcoming')
     getHome('now_playing')
 }
-
-let popular = getHome('popular')
-let topRated = getHome('top_rated')
-let upcoming =  getHome('upcoming')
-let nowPlaying = getHome('now_playing')
-
 
 //FUNCION DE BUSCAR 
 /* const search = () => {
@@ -92,14 +87,16 @@ const printResults = (param) => {
     containerPopular.innerHTML = '';
 
     param.forEach((e) => {
+    let li = document.createElement('li');
     let movie = document.createElement('a');
     let image = document.createElement('img');
     image.innerText = `${e.img}`
     movie.innerText = `${e.title}`;
     image.src = `${e.img}`;
     movie.href = '#';
-    containerPopular.appendChild(image);
-    containerPopular.appendChild(movie);
+    containerPopular.appendChild(li);
+    li.appendChild(image);
+    li.appendChild(movie);
     });
 }
 
@@ -112,16 +109,16 @@ const printHome = (param) => {
     homeTopRated.innerHTML = '';
 
     param.forEach((e) => {
-    let movie = document.createElement('a');
-    let image = document.createElement('img');
-    image.innerText = `${e.img}`
-    movie.innerText = `${e.title}`;
-    image.src = `${e.img}`;
-    movie.href = '#';
-    homePopular.appendChild(image);
-    homePopular.appendChild(movie);
-    homeTopRated.appendChild(image);
-    homeTopRated.appendChild(movie);
+        let li = document.createElement('li');
+        let movie = document.createElement('a');
+        let image = document.createElement('img');
+        image.innerText = `${e.img}`
+        movie.innerText = `${e.title}`;
+        image.src = `${e.img}`;
+        movie.href = '#';
+        containerPopular.appendChild(li);
+        li.appendChild(image);
+        li.appendChild(movie);
     });
 
 }
