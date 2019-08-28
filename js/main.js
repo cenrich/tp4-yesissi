@@ -6,20 +6,20 @@ const onLoad = () => {
     homePage();
     getHome();
     getData();
- }
+}
 
 //HOME 
 
 const getHome = category => {
-    fetch (`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
-    .then (response => response.json())
-    .then (resData => {
-        let {results} = resData
-        resData.filter
-        let movies = results.map(e=> apiMovieToMovie(e))
-        printHome(movies.filter((e,i)=>i<5)) 
-        console.log(movies)
-    });
+    fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
+        .then(response => response.json())
+        .then(resData => {
+            let { results } = resData
+            resData.filter
+            let movies = results.map(e => apiMovieToMovie(e))
+            printHome(movies.filter((e, i) => i < 5))
+            console.log(movies)
+        });
 };
 
 const homePage = () => {
@@ -45,16 +45,16 @@ const homePage = () => {
 
 
 
-    
+
 //FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
 const getData = category => {
-    fetch (`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
-    .then (response => response.json())
-    .then (resData => {
-        let {results} = resData
-        let movies = results.map(e => apiMovieToMovie(e))
-        printResults(movies)
-    });
+    fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
+        .then(response => response.json())
+        .then(resData => {
+            let { results } = resData
+            let movies = results.map(e => apiMovieToMovie(e))
+            printResults(movies)
+        });
 };
 
 getData('popular')
@@ -62,9 +62,9 @@ getData('popular')
 
 //TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
 const apiMovieToMovie = apiMovie => {
-    let {title, poster_path} = apiMovie
+    let { title, poster_path } = apiMovie
     let movie = {
-        title: title, 
+        title: title,
         img: `https://image.tmdb.org/t/p/w500/${poster_path}`
     }
     return movie
@@ -153,3 +153,11 @@ const toggleFunction = (movieId) => {
 	}
 }
 
+
+// Toggle hamburger
+function toggleMenu() {
+    var element = document.getElementById("hamburger");
+    element.classList.toggle("hamburger-active");
+    var element = document.getElementById("nav");
+    element.classList.toggle("nav-mobile");
+}

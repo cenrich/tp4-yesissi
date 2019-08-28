@@ -1,5 +1,6 @@
 $font: 'Roboto', sans-serif;
 $ada-pink: #BC3B68;
+$lighter-pink: lighten($color: $ada-pink, $amount: 20%);
 $black: #333333;
 $white: #ffffff;
 $grey: #c7c7c7;
@@ -7,3 +8,4 @@ $darkgrey: #4d4d4d;
 $lightgrey: #fafafa;
 $shadow: 2px 2px 4px rgba(0, 0, 0, 0.16);
 
+$transition: 0.5s ease;
