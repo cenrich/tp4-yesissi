@@ -52,7 +52,8 @@
     </div>
     <header class="search">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search for a movie..." class="search-input"  id="searchInput" onfocus="this.value=''" onkeyup="searchFunction()">
+        <input type="text" placeholder="Search for a movie..." class="search-input" id="searchInput"
+            onfocus="this.value=''" onkeyup="searchFunction()">
     </header>
     <div class="main-container">
         <!-- <section id="home">
@@ -92,6 +93,7 @@
             <div class="movies-container">
                 <header id="movie-title" class="movies-header">
                     <h2 id="category-title"></h2>
+                    <span id="category-results"></span>
                 </header>
                 <div class="movies-list" id="movies">
 
@@ -124,8 +126,11 @@
                 </div>
             </div>
         </div>
-        <section id="resultsContainer" class="bigContainer">
-
+        <section id="resultsContainer" class="movies-container">
+            <header id="movie-title" class="movies-header">
+                <h2 id="category-title">Resultados</h2>
+                <span id="category-results"></span>
+            </header>
         </section>
     </div>
 </body>

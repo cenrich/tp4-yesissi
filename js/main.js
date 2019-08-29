@@ -40,15 +40,6 @@ const homePage = () => {
     }
 }; */
 
-//FUNCION IMPRIMIR RESULTADO DE SEARCH EN EL HOME
-
-
-
-// function clearBanner = () => {
-//     var element = document.getElementsByClassName("main-header");
-//     element.classList.add("hide");
-// }
-
 
 //FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
 const getData = category => {
@@ -101,30 +92,30 @@ const selectCategory = (category) => {
         .then(res=>setCatTitle(res.results,category,res.total_results))
 }
 
-const setCatTitle = (category,totalResults) => {
+const setCatTitle = (e) => {
     let movieTitleContainer = document.getElementById('movie-title');
     let categoryTitle = document.getElementById('category-title');
-    switch (category) {
-        case "popular":
-            categoryTitle.innerText="Popular";
-        break;
-        case "top_rated":
-            categoryTitle.innerText="Mejor puntuadas";
-        break;
-        case "upcoming":
-            categoryTitle.innerText="Pronto"
-        break;
-        case "now_playing":
-            categoryTitle.innerText="En cartel"
-        break;
-        default: 
-            categoryTitle.innerText="Resultados"
-    }
-    const categoryCount = document.createElement("span")
-    categoryCount.innerText=`${totalResults} resultados`
-    categoryCount.classList.add("catCount")
+    // switch (category) {
+    //     case "popular":
+    //         categoryTitle.innerText="Popular";
+    //     break;
+    //     case "top_rated":
+    //         categoryTitle.innerText="Mejor puntuadas";
+    //     break;
+    //     case "upcoming":
+    //         categoryTitle.innerText="Pronto"
+    //     break;
+    //     case "now_playing":
+    //         categoryTitle.innerText="En cartel"
+    //     break;
+    //     default: 
+    //         categoryTitle.innerText="Resultados"
+    // }
+    categoryTitle.innerText = `${e.id}`;
+    let categoryResults = document.getElementById('category-results');
+    categoryResults.innerText = `${e.totalResults}`;
     movieTitleContainer.appendChild(categoryTitle);
-    movieTitleContainer.appendChild(categoryCount)
+    movieTitleContainer.appendChild(categoryResults)
     return movieTitleContainer
 }
 
