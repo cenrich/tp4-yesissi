@@ -44,60 +44,112 @@ const homePage = () => {
 
 
 
+// function clearBanner = () => {
+//     var element = document.getElementsByClassName("main-header");
+//     element.classList.add("hide");
+// }
 
 
 //FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
 const getData = category => {
+
     fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
         .then(response => response.json())
         .then(resData => {
             let { results } = resData
             let movies = results.map(e => apiMovieToMovie(e))
             printResults(movies)
+
         });
+    
 };
 
 getData('popular')
+getData('top_rated')
+getData('upcoming')
+getData('now_playing')
 
 
 //TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
 const apiMovieToMovie = apiMovie => {
-    let { title, poster_path } = apiMovie
+    let { title, poster_path, id } = apiMovie
     let movie = {
+        id: id,
         title: title,
         img: `https://image.tmdb.org/t/p/w500/${poster_path}`
     }
     return movie
 }
 
-/* const apiMovieToModal = apiMovie => {
-    let {id, title, img, overview, genre_ids, release_date} = apiMovie
-    let modal = {
-        id: id,
-        title: title, 
-        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
-        overview: overview, 
-        genre: gendre_ids[],
-        release: release_date, 
-} */
+// const apiMovieToModal = apiModal => {
+//     let { id, title, img, overview, genre_ids, release_date } = apiModal
+//     let modal = {
+//         id: id,
+//         title: title,
+//         img: `https://image.tmdb.org/t/p/w500/${poster_path}`,
+//         overview: overview,
+//         genre: gendre_ids,
+//         release: release_date,
+//     }
+//     return modal
+// }
+
+
+const selectCategory = (category) => {
+    fetch (`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`) //ver (1)
+        .then(res=>res.json())
+        .then(res=>setCatTitle(res.results,category,res.total_results))
+}
+
+const setCatTitle = (category,totalResults) => {
+    let movieTitleContainer = document.getElementById('movie-title');
+    let categoryTitle = document.getElementById('category-title');
+    switch (category) {
+        case "popular":
+            categoryTitle.innerText="Popular";
+        break;
+        case "top_rated":
+            categoryTitle.innerText="Mejor puntuadas";
+        break;
+        case "upcoming":
+            categoryTitle.innerText="Pronto"
+        break;
+        case "now_playing":
+            categoryTitle.innerText="En cartel"
+        break;
+        default: 
+            categoryTitle.innerText="Resultados"
+    }
+    const categoryCount = document.createElement("span")
+    categoryCount.innerText=`${totalResults} resultados`
+    categoryCount.classList.add("catCount")
+    movieTitleContainer.appendChild(categoryTitle);
+    movieTitleContainer.appendChild(categoryCount)
+    return movieTitleContainer
+}
 
 //FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 
 const printResults = (param) => {
+    clearAll()
+    const homeContainer = document.getElementById("view-all")
+    homeContainer.classList.add("display")
+    homeContainer.classList.remove("hide")
     let containerPopular = document.getElementById('movies');
     containerPopular.innerHTML = '';
 
     param.forEach((e) => {
-    let li = document.createElement('li');
-    let movie = document.createElement('a');
-    let image = document.createElement('img');
-    li.onclick = () => toggleFunction() //definir el id con los results para info modal y pasarlo como parametro de esta funcion
-    image.innerText = `${e.img}`
-    movie.innerText = `${e.title}`;
-    image.src = `${e.img}`;
-    containerPopular.appendChild(li);
-    li.appendChild(image);
-    li.appendChild(movie);
+        let li = document.createElement('li');
+        let movie = document.createElement('a');
+        let image = document.createElement('img');
+        li.onclick = () => toggleFunction() //definir el id con los results para info modal y pasarlo como parametro de esta funcion
+        image.innerText = `${e.img}`
+        movie.innerText = `${e.title}`;
+        image.src = `${e.img}`;
+        containerPopular.appendChild(li);
+        li.appendChild(image);
+        li.appendChild(movie);
     });
+    setCatTitle()
 }
 
 
@@ -125,32 +177,33 @@ const printHome = (param) => {
 
 // modal
 const loadModal = (movieId) => {
-	fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`)
-		.then(response => response.json())
-		.then(res => {
-			const mainTitleNode = document.getElementById("mainTitle")
-			mainTitleNode.innerText = res.title
-			document.getElementById("img-modal").src = `https://image.tmdb.org/t/p/w500${res.poster_path}`
-			const descriptionNode = document.getElementById("movieDescription")
-			descriptionNode.innerText = res.overview
-			const genreNode = document.getElementById("genre")
-			const genreList = []
-			res.genres.forEach(({
-				name
-			}) => genreList.push(name))
-			genreNode.innerText = genreList.join(", ")
-			const releaseDateNode = document.getElementById("releaseDate")
-			releaseDateNode.innerText = res.release_date
-		})
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`)
+        .then(response => response.json())
+        .then(res => {
+            const mainTitleNode = document.getElementById("mainTitle")
+            mainTitleNode.innerText = res.title
+            document.getElementById("img-modal").src = `https://image.tmdb.org/t/p/w500${res.poster_path}`
+            const descriptionNode = document.getElementById("movieDescription")
+            descriptionNode.innerText = res.overview
+            const genreNode = document.getElementById("genre")
+            const genreList = []
+            res.genres.forEach(({
+                name
+            }) => genreList.push(name))
+            genreNode.innerText = genreList.join(", ")
+            const releaseDateNode = document.getElementById("releaseDate")
+            releaseDateNode.innerText = res.release_date
+        })
+
 }
 const toggleFunction = (movieId) => {
-	var modal = document.getElementById("modalContainer");
-	if (modal.style.display === "none") {
-		loadModal(movieId)
-		modal.style.display = "block";
-	} else {
-		modal.style.display = "none";
-	}
+    var modal = document.getElementById("modalContainer");
+    if (modal.style.display === "none") {
+        loadModal(movieId)
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
 }
 
 
@@ -160,4 +213,81 @@ function toggleMenu() {
     element.classList.toggle("hamburger-active");
     var element = document.getElementById("nav");
     element.classList.toggle("nav-mobile");
+}
+
+
+
+// test busqueda
+
+
+
+
+const clearAll = () => {
+    document.getElementById("view-all").classList.add("hide")
+    document.getElementById("view-all").classList.remove("display")
+    document.getElementById("resultsContainer").classList.add("hide")
+    document.getElementById("resultsContainer").classList.remove("display")
+}
+
+const addList = (arrayOfMovies, container) => {
+    arrayOfMovies.forEach((e, { poster_path }) => {
+        const element2 = document.createElement("li")
+        let movie = document.createElement('a');
+        const image = document.createElement("img")
+        image.innerText = `${e.img}`;
+        movie.innerText = `${e.title}`;
+        poster_path
+        image.src = `${e.img}`
+        container.appendChild(element2)
+        element2.appendChild(image);
+        element2.appendChild(movie);
+    })
+}
+
+const searchFunction = () => {
+    let query = event.target.value
+    if (query.length >= 3 || (event.keyCode === 13 && query !== lastRequest)) {
+        lastRequest = query
+        fetch(`https://api.themoviedb.org/3/search/movie?${api_key}&query=${query}`)
+            .then(res => res.json())
+            .then(res => printSearch(res.results, query, res.total_results))
+    }
+}
+
+const printSearch = (movies, query) => {
+    clearAll()
+    const resultsContainer = document.getElementById("resultsContainer")
+    resultsContainer.innerHTML = ""
+    resultsContainer.classList.add("display")
+    resultsContainer.classList.remove("hide")
+    const results = document.createElement("ul")
+    results.classList.add("search-results")
+    results.id = "results"
+    addList(movies, results)
+    resultsContainer.appendChild(results)
+    moreBtn(results, query)
+}
+
+
+const moreBtn = (container, category) => {
+    let currentPage = 2
+    const loadMoreNode = document.createElement("button")
+    loadMoreNode.innerText = "Más resultados"
+    loadMoreNode.onclick = () => {
+        loadMore(category, currentPage)
+        currentPage++
+        return currentPage
+    }
+    container.parentNode.appendChild(loadMoreNode)
+}
+
+const loadMore = (query, currentPage) => {
+    const container = document.getElementById("results")
+    let url
+    query === "popular" || query === "top_rated" || query === "upcoming" || query === "now_playing"
+        ? url = `https://api.themoviedb.org/3/movie/${query}?api_key=${api_key}&page=${currentPage}`
+        : url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${currentPage}`
+    fetch(url)
+        .then(response => response.json())
+        .then(res => addList(res.results, container))
 }

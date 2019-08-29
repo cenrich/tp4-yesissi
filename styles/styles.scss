@@ -212,7 +212,7 @@ video {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../images/batman.jpg");
+    background-image: url("../images/dakotaharsh.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -445,3 +445,9 @@ video {
   }
 }
 
+.hide{
+  display: none !important;
+}
+.display{
+  display: block !important;
+}

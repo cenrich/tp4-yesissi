@@ -15,7 +15,7 @@
 
 <body onload="onLoad()">
     <nav id="nav" class="nav">
-        <a href="#" class="logo" onclick="homePage()">
+        <a href="index.html" class="logo" onclick="homePage()">
             <img src="images/iso_blanco_transparent.svg" alt="Ada">
         </a>
         <ul class="nav-list">
@@ -52,18 +52,46 @@
     </div>
     <header class="search">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search for a movie..." class="search-input" onkeyup="search()">
+        <input type="text" placeholder="Search for a movie..." class="search-input"  id="searchInput" onfocus="this.value=''" onkeyup="searchFunction()">
     </header>
     <div class="main-container">
-        <section id="home">
-            <header class="main-header">
-                <h1>Letterboxd</h1>
+        <!-- <section id="home">
+            <header class="movies-header">
+                <h2>Popular</h2>
+                <div id='homePopular'></div>
+                <a href="#" class="view-all">View All</a>
             </header>
+            <div class="movies-list" id="popular">
+            </div>
+            <header class="movies-header">
+                <h2>Top Rated</h2>
+                <div id='homePopular'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <div class="movies-list" id="top-rated">
+            </div>
+            <header class="movies-header">
+                <h2>Upcoming</h2>
+                <div id='homePopular'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <div class="movies-list" id="upcoming">
+            </div>
+            <header class="movies-header">
+                <h2>NowPlaying</h2>
+                <div id='homePopular'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <div class="movies-list" id="now-playing">
+            </div>
+        </section> -->
+        <section id="view-all">
+            <!-- <header class="main-header">
+                <h1>It's a harsh world</h1>
+            </header> -->
             <div class="movies-container">
-                <header class="movies-header">
-                    <h2>Popular</h2>
-                    <div id='homePopular'></div>
-                    <a href="#" class="view-all">View All</a>
+                <header id="movie-title" class="movies-header">
+                    <h2 id="category-title"></h2>
                 </header>
                 <div class="movies-list" id="movies">
 
@@ -75,26 +103,30 @@
                 <div id="modal">
                     <div id="upperModal">
                         <a href="#" onclick="toggleFunction()"><i class="fas fa-times"></i></a>
-                    <div><img id="img-modal"></div>
+                        <div><img id="img-modal"></div>
                         <h2 id="mainTitle"></h2>
                         <p id="slogan"></p>
                     </div>
                     <div id="lowerModal">
                         <div class='movieDetails'>
-                        <p id="movieDescription"></p>
-                        <div>
-                            <h4 class="modalTitle">GÉNERO</h4>
-                            <p id="genre"></p>
+                            <p id="movieDescription"></p>
+                            <div>
+                                <h4 class="modalTitle">GÉNERO</h4>
+                                <p id="genre"></p>
+                            </div>
+                            <div>
+                                <h4 class="modalTitle">FECHA DE LANZAMIENTO</h4>
+                                <p id="releaseDate"></p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="modalTitle">FECHA DE LANZAMIENTO</h4>
-                            <p id="releaseDate"></p>
-                        </div>
-                    </div>
                     </div>
                     <div id="largePoster"></div>
                 </div>
             </div>
+        </div>
+        <section id="resultsContainer" class="bigContainer">
+
+        </section>
     </div>
 </body>
 
