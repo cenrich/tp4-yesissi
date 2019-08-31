@@ -25,7 +25,7 @@ const getHome = (category) => {
 
 const printHome = (param) => {
     /* let home = document.getElementById('home') */
-    let homePopular = document.getElementById('homePopular')
+    // let homePopular = document.getElementById('homePopular')
     let homeTopRated = document.getElementById('homeTopRated')
  /*    let homeUpcoming = document.getElementById('homeUpcoming')
     let homeNowPlaying = document.getElementById('homeNowPlaying') */
@@ -37,7 +37,7 @@ const printHome = (param) => {
         movie.innerText = `${e.title}`;
         image.src = `${e.img}`;
         li.onclick = () => toggleFunction()
-        homePopular.appendChild(li);
+        //homePopular.appendChild(li);
         homeTopRated.appendChild(li);
         li.appendChild(image);
         li.appendChild(movie);
@@ -56,6 +56,9 @@ const homePage = () => {
     getHome('upcoming')
     getHome('now_playing')
 }
+
+
+//llama a popular / toprated / now playing / popular / upcoming
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
@@ -145,11 +148,11 @@ const getData = category => {
     
 };
 
-getData('popular')
+/* getData('popular')
 getData('top_rated')
 getData('upcoming')
 getData('now_playing')
-
+ */
 
 //TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
 const apiMovieToMovie = apiMovie => {
