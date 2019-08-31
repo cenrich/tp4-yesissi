@@ -9,12 +9,8 @@ const onLoad = () => {
 }
 
 //HOME 
-const getHome = category => {
-    let home = document.getElementById('home')
-    let homePopular = document.getElementById('homePopular')
-    let homeTopRated = document.getElementById('homeTopRated')
-    let homeUpcoming = document.getElementById('homeUpcoming')
-    let homeNowPlaying = document.getElementById('homeNowPlaying')
+
+const getHome = (category) => {
     fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
         .then(response => response.json())
         .then(resData => {
@@ -25,17 +21,17 @@ const getHome = category => {
             console.log(movies)
         });
 
-    home.appendChild()
 };
+
+//necesitamos un parametro que nos diga donde queremos que nos traiga las cosas
 
 
 const printHome = (param) => {
-    let homePopular = document.getElementById('homePopular');
-    homePopular.innerHTML = '';
-    let homeTopRated = document.getElementById('homeTopRated');
-    homeTopRated.innerHTML = '';
-
-
+    /* let home = document.getElementById('home') */
+    let homePopular = document.getElementById('homePopular')
+    let homeTopRated = document.getElementById('homeTopRated')
+ /*    let homeUpcoming = document.getElementById('homeUpcoming')
+    let homeNowPlaying = document.getElementById('homeNowPlaying') */
     param.forEach((e) => {
         let li = document.createElement('li');
         let movie = document.createElement('a');
@@ -44,13 +40,18 @@ const printHome = (param) => {
         movie.innerText = `${e.title}`;
         image.src = `${e.img}`;
         li.onclick = () => toggleFunction()
-        containerPopular.appendChild(li);
+        homePopular.appendChild(li);
+        homeTopRated.appendChild(li);
         li.appendChild(image);
         li.appendChild(movie);
     });
-
+/*     home.appendChild(homePopular)
+    home.appendChild(homeTopRated)
+    home.appendChild(homeUpcoming)
+    home.appendChild(homeNowPlaying)
+    homeNowPlaying.appendChild(param) */
 }
-
+console.log(getHome('popular'))
 
 const homePage = () => {
     getHome('popular')
@@ -186,7 +187,6 @@ const printResults = (param) => {
         li.appendChild(image);
         li.appendChild(movie);
     });
-    setCatTitle()
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
