@@ -18,12 +18,9 @@ const getHome = (category) => {
             resData.filter
             let movies = results.map(e => apiMovieToMovie(e))
             printHome(movies.filter((e, i) => i < 5))
-            console.log(movies)
         });
 
 };
-
-//necesitamos un parametro que nos diga donde queremos que nos traiga las cosas
 
 
 const printHome = (param) => {
