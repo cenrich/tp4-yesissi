@@ -8,87 +8,129 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;subset=cyrillic" rel="stylesheet">
     <script src="js/main.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/styles.css">
-    <link rel="icon" type="png" href="images/letterboxd.png"  />
+    <link rel="icon" type="png" href="images/letterboxd.png" />
     <title>Letterboxd</title>
+    <script src="https://kit.fontawesome.com/4f37430476.js"></script>
 </head>
 
-<body onload="onLoad()">
-    <div class="container">
-        <nav class="nav">
-            <a href="#" class="logo"><img src="images/iso_blanco_transparent.svg" alt="Ada"></a>
-            <ul class="nav-list">
-                <li class='nav-item' >
-                    <a href="#" class="nav-link" onclick="getData('popular')">
-                        <div class="image-container" id="popular" >
-                                <div class="svg"><i class="fas fa-arrow-up"></i></div>
-                            <span class="title-popular">POPULAR</span>
-                        </div>
-                    </a>
-                </li>
-                <li class='nav-item'>
-                    <a href="#" class="nav-link" onclick="getData('top_rated')">
-                        <div class="image-container">
-                                <div class="svg"><i class="fas fa-arrow-up"></i></div>
-                            <span class="title-toprated">TOP RATED</span>
-                        </div>
-                    </a>
-                </li>
-                <li class='nav-item'>
-                    <a href="#" class="nav-link" onclick="getData('upcoming')">
-                        <div class="image-container">
-                            <div class="svg"><i class="fas fa-search"></i></div>
-                            <span class="title-upcoming">UPCOMING</span>
-                        </div>
-                    </a>
-                </li>
-                <li class='nav-item'>
-                    <a href="#" class="nav-link" onclick="getData('now_playing')">
-                        <div class="image-container">
-                            <div class="svg"><i class="fas fa-search"></i></div>
-                            <span class="title-nowplaying">NOW PLAYING</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <header class="search">
-            <div class="image-container">
-                <div class="search-icon"><i class="fas fa-search"></i></div>
-                <input type="text" placeholder="Search for a movie..." class="search-input" onkeyup="search()">
-            </div>
-        </header>
-        <section class="main">
-            <section class="home">
-                <header class="main-header">
-                    <h1>Letterboxd</h1>
+<body onload="homePage()"> <!--ACÁ SOLAMENTE LLAMAMOS A LA FUNCION QUE RELLENA LAS LISTAS-->
+    <nav id="nav" class="nav">
+        <a href="index.html" class="logo" onclick="homePage()">
+            <img src="images/iso_blanco_transparent.svg" alt="Ada">
+        </a>
+        <ul class="nav-list">
+            <li class='nav-item'>
+                <a href="#" class="nav-link" onclick="getData('popular'), toggleMenu()">
+                    <i class="fas fa-star"></i>
+                    <span class="nav-item-title">POPULAR</span>
+                </a>
+            </li>
+            <li class='nav-item'>
+                <a href="#" class="nav-link" onclick="getData('top_rated'), toggleMenu()">
+                    <i class="fas fa-arrow-up"></i>
+                    <span class="nav-item-title">TOP RATED</span>
+                </a>
+            </li>
+            <li class='nav-item'>
+                <a href="#" class="nav-link" onclick="getData('upcoming'), toggleMenu()">
+                    <i class="fas fa-calendar"></i>
+                    <span class="nav-item-title">UPCOMING</span>
+                </a>
+            </li>
+            <li class='nav-item'>
+                <a href="#" class="nav-link" onclick="getData('now_playing'), toggleMenu()">
+                    <i class="fas fa-play"></i>
+                    <span class="nav-item-title">NOW PLAYING</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div onclick="toggleMenu()" id="hamburger" class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <header class="search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search for a movie..." class="search-input" id="searchInput"
+            onfocus="this.value=''" onkeyup="searchFunction()">
+    </header>
+    <div class="main-container">
+        <section id="home">
+            <header class="movies-header">
+                <h2>Popular</h2>
+                <div id='homePopular'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <ul class="movies-list" id="popular">
+            </ul> <!--QUEREMOS QUE LOS CONTENEDORES SEAN UL, PORQUE CON LAS PELÍCULAS ARMARON LI-->
+            <header class="movies-header">
+                <h2>Top Rated</h2>
+                <div id='homeTopRated'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <ul class="movies-list" id="top_rated">
+            </ul> <!--TENGAN OJO EN LLAMAR A CADA CONTENEDOR CON UN ID EXACTAMENTE IGUAL A LA CATEGORÍA, PARA QUE FUNCIONE BIEN EL ARREGLITO-->
+            <header class="movies-header">
+                <h2>Upcoming</h2>
+                <div id='homeUpcoming'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <ul class="movies-list" id="upcoming">
+            </ul> <!--ACÁ OTRO CAMBIO EN LÍNEA CON LO UQE LES DIJE-->
+            <header class="movies-header">
+                <h2>NowPlaying</h2>
+                <div id='homeNowPlaying'></div>
+                <a href="#" class="view-all">View All</a>
+            </header>
+            <ul class="movies-list" id="now_playing">
+            </ul> <!--ACÁ OTRO CAMBIO EN LÍNEA CON LO UQE LES DIJE-->
+        </section>
+        <section id="view-all">
+            <!-- <header class="main-header">
+                <h1>It's a harsh world</h1>
+            </header> -->
+            <div class="movies-container">
+                <header id="movie-title" class="movies-header">
+                    <h2 id="category-title"></h2>
+                    <span id="category-results"></span>
                 </header>
-                <div class="movies-container">
-                    <div class="movies" id="movies">
-                        <header class="movies-header">
-                            <h2>Popular</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </header>
-                    </div>
-                    <div class="movies" id="movies">
-                        <header class="movies-header">
-                            <h2>Top Rated</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </header>
-                    </div>
-                    <div class="movies" id="movies">
-                        <header class="movies-header">
-                            <h2>Upcoming</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </header>
-                    </div>
-                    <div class="movies" id="movies">
-                        <header class="movies-header">
-                            <h2>Now Playing</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </header>
-                    </div>
+                <div class="movies-list" id="movies">
+
                 </div>
-            </section>
+            </div>
+        </section>
+        <div id="modalContainer">
+            <div id="modalBackground">
+                <div id="modal">
+                    <div id="upperModal">
+                        <a href="#" onclick="toggleFunction()"><i class="fas fa-times"></i></a>
+                        <div><img id="img-modal"></div>
+                        <h2 id="mainTitle"></h2>
+                        <p id="slogan"></p>
+                    </div>
+                    <div id="lowerModal">
+                        <div class='movieDetails'>
+                            <p id="movieDescription"></p>
+                            <div>
+                                <h4 class="modalTitle">GÉNERO</h4>
+                                <p id="genre"></p>
+                            </div>
+                            <div>
+                                <h4 class="modalTitle">FECHA DE LANZAMIENTO</h4>
+                                <p id="releaseDate"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="largePoster"></div>
+                </div>
+            </div>
+        </div>
+        <section id="resultsContainer" class="movies-container">
+            <header id="movie-title" class="movies-header">
+                <h2 id="category-title">Resultados</h2>
+                <span id="category-results"></span>
+            </header>
         </section>
     </div>
 </body>
