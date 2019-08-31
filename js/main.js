@@ -2,31 +2,50 @@ const api_key = 'd25219b09e23f4a8cbeed6c5ebe7ac2a'
 let lastRequest;
 let i = []
 
-const onLoad = () => {
-    homePage();
-    getHome();
-    getData();
-}
+//ESTO LO SACAMOS PORQUE NO LO NECESITAMOS. SOLO QUEREMOS A LA FUNCIÓN HOMEPAGE AL CARGAR LA PÁGINA
+// const onLoad = () => {
+//     homePage();
+//     getHome();
+//     getData();
+// }
+
+//CAMBIÉ EL ORDEN DE LAS FUNCIONES PARA TENER JUNTAS LAS QUE QUERÍA VER PERO DA LO MISMO
 
 //HOME 
+const homePage = () => {
+    getHome('popular')
+    getHome('top_rated')
+    getHome('upcoming')
+    getHome('now_playing')
+}
 
 const getHome = (category) => {
     fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
         .then(response => response.json())
         .then(resData => {
             let { results } = resData
-            resData.filter
-            let movies = results.map(e => apiMovieToMovie(e))
-            printHome(movies.filter((e, i) => i < 5))
+            // resData.filter ESTA LÍNEA NO HACE NADA
+            let movies = results.map(e => apiMovieToMovie(e)) //ESTO SOLO PARA PENSAR: HACE FALTA?
+            printHome(movies.filter((e, i) => i < 5), category) //ACÁ LE PASO POR PARÁMETRO LA CATEGORÍA PERO FUNCIONA PORQUE LE PUSIMOS DE ID A LOS CONTENEDORES EXACTAMENTE EL MISMO NOMBRE
         });
 
 };
 
+//TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
+const apiMovieToMovie = apiMovie => {
+    let { title, poster_path, id } = apiMovie
+    let movie = {
+        id: id,
+        title: title,
+        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
+    }
+    return movie
+}
 
-const printHome = (param) => {
+const printHome = (param, category) => { //ESTA ES LA FUNCIÓN EN LA QUE HAY QUE PARAMETRIZAR EL CONTENEDOR! LE PASÉ CATEGORY PORQUE HICIMOS ESO DE PONERLE EXACTAMENTE EL MISMO NOMBRE A LA UL
     /* let home = document.getElementById('home') */
     // let homePopular = document.getElementById('homePopular')
-    let homeTopRated = document.getElementById('homeTopRated')
+    let container = document.getElementById(category) //ACÁ EN VEZ DE UN CONTENEDOR ESPECÍFICO, LE PASO EL NOMBRE DE LA CATEGORÍA
  /*    let homeUpcoming = document.getElementById('homeUpcoming')
     let homeNowPlaying = document.getElementById('homeNowPlaying') */
     param.forEach((e) => {
@@ -41,6 +60,7 @@ const printHome = (param) => {
         homeTopRated.appendChild(li);
         li.appendChild(image);
         li.appendChild(movie);
+        container.appendChild(li) //LE PEGO EL ELEMENTO CREADO AL CONTENEDOR GENÉRICO
     });
 /*     home.appendChild(homePopular)
     home.appendChild(homeTopRated)
@@ -48,14 +68,9 @@ const printHome = (param) => {
     home.appendChild(homeNowPlaying)
     homeNowPlaying.appendChild(param) */
 }
-console.log(getHome('popular'))
+// console.log(getHome('popular'))
 
-const homePage = () => {
-    getHome('popular')
-    getHome('top_rated')
-    getHome('upcoming')
-    getHome('now_playing')
-}
+
 
 
 //llama a popular / toprated / now playing / popular / upcoming
@@ -154,16 +169,7 @@ getData('upcoming')
 getData('now_playing')
  */
 
-//TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
-const apiMovieToMovie = apiMovie => {
-    let { title, poster_path, id } = apiMovie
-    let movie = {
-        id: id,
-        title: title,
-        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
-    }
-    return movie
-}
+
 
 
 //FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 

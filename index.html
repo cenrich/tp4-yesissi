@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/4f37430476.js"></script>
 </head>
 
-<body onload="onLoad()">
+<body onload="homePage()"> <!--ACÁ SOLAMENTE LLAMAMOS A LA FUNCION QUE RELLENA LAS LISTAS-->
     <nav id="nav" class="nav">
         <a href="index.html" class="logo" onclick="homePage()">
             <img src="images/iso_blanco_transparent.svg" alt="Ada">
@@ -62,29 +62,29 @@
                 <div id='homePopular'></div>
                 <a href="#" class="view-all">View All</a>
             </header>
-            <div class="movies-list" id="popular">
-            </div>
+            <ul class="movies-list" id="popular">
+            </ul> <!--QUEREMOS QUE LOS CONTENEDORES SEAN UL, PORQUE CON LAS PELÍCULAS ARMARON LI-->
             <header class="movies-header">
                 <h2>Top Rated</h2>
                 <div id='homeTopRated'></div>
                 <a href="#" class="view-all">View All</a>
             </header>
-            <div class="movies-list" id="top-rated">
-            </div>
+            <ul class="movies-list" id="top_rated">
+            </ul> <!--TENGAN OJO EN LLAMAR A CADA CONTENEDOR CON UN ID EXACTAMENTE IGUAL A LA CATEGORÍA, PARA QUE FUNCIONE BIEN EL ARREGLITO-->
             <header class="movies-header">
                 <h2>Upcoming</h2>
                 <div id='homeUpcoming'></div>
                 <a href="#" class="view-all">View All</a>
             </header>
-            <div class="movies-list" id="upcoming">
-            </div>
+            <ul class="movies-list" id="upcoming">
+            </ul> <!--ACÁ OTRO CAMBIO EN LÍNEA CON LO UQE LES DIJE-->
             <header class="movies-header">
                 <h2>NowPlaying</h2>
                 <div id='homeNowPlaying'></div>
                 <a href="#" class="view-all">View All</a>
             </header>
-            <div class="movies-list" id="now-playing">
-            </div>
+            <ul class="movies-list" id="now_playing">
+            </ul> <!--ACÁ OTRO CAMBIO EN LÍNEA CON LO UQE LES DIJE-->
         </section>
         <section id="view-all">
             <!-- <header class="main-header">
