@@ -9,8 +9,12 @@ const onLoad = () => {
 }
 
 //HOME 
-
 const getHome = category => {
+    let home = document.getElementById('home')
+    let homePopular = document.getElementById('homePopular')
+    let homeTopRated = document.getElementById('homeTopRated')
+    let homeUpcoming = document.getElementById('homeUpcoming')
+    let homeNowPlaying = document.getElementById('homeNowPlaying')
     fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
         .then(response => response.json())
         .then(resData => {
@@ -20,129 +24,9 @@ const getHome = category => {
             printHome(movies.filter((e, i) => i < 5))
             console.log(movies)
         });
+
+    home.appendChild()
 };
-
-const homePage = () => {
-    getHome('popular')
-    getHome('top_rated')
-    getHome('upcoming')
-    getHome('now_playing')
-}
-
-//FUNCION DE BUSCAR 
-/* const search = () => {
-    let searchInput = event.target.value;
-    if (searchInput.length >=3 || (event.keyCode === 13 && searchInput !== lastRequest)) {
-        lastRequest = searchInput;
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchInput}`)
-        .then(response =>  response.json())
-        .then( resSearch => console.log(resSearch.results));
-    }
-}; */
-
-
-//FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
-const getData = category => {
-
-    fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
-        .then(response => response.json())
-        .then(resData => {
-            let { results } = resData
-            let movies = results.map(e => apiMovieToMovie(e))
-            printResults(movies)
-
-        });
-    
-};
-
-getData('popular')
-getData('top_rated')
-getData('upcoming')
-getData('now_playing')
-
-
-//TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
-const apiMovieToMovie = apiMovie => {
-    let { title, poster_path, id } = apiMovie
-    let movie = {
-        id: id,
-        title: title,
-        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
-    }
-    return movie
-}
-
-// const apiMovieToModal = apiModal => {
-//     let { id, title, img, overview, genre_ids, release_date } = apiModal
-//     let modal = {
-//         id: id,
-//         title: title,
-//         img: `https://image.tmdb.org/t/p/w500/${poster_path}`,
-//         overview: overview,
-//         genre: gendre_ids,
-//         release: release_date,
-//     }
-//     return modal
-// }
-
-
-const selectCategory = (category) => {
-    fetch (`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`) //ver (1)
-        .then(res=>res.json())
-        .then(res=>setCatTitle(res.results,category,res.total_results))
-}
-
-const setCatTitle = (e) => {
-    let movieTitleContainer = document.getElementById('movie-title');
-    let categoryTitle = document.getElementById('category-title');
-    // switch (category) {
-    //     case "popular":
-    //         categoryTitle.innerText="Popular";
-    //     break;
-    //     case "top_rated":
-    //         categoryTitle.innerText="Mejor puntuadas";
-    //     break;
-    //     case "upcoming":
-    //         categoryTitle.innerText="Pronto"
-    //     break;
-    //     case "now_playing":
-    //         categoryTitle.innerText="En cartel"
-    //     break;
-    //     default: 
-    //         categoryTitle.innerText="Resultados"
-    // }
-    categoryTitle.innerText = `${e.id}`;
-    let categoryResults = document.getElementById('category-results');
-    categoryResults.innerText = `${e.totalResults}`;
-    movieTitleContainer.appendChild(categoryTitle);
-    movieTitleContainer.appendChild(categoryResults)
-    return movieTitleContainer
-}
-
-//FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 
-const printResults = (param) => {
-    clearAll()
-    const homeContainer = document.getElementById("view-all")
-    homeContainer.classList.add("display")
-    homeContainer.classList.remove("hide")
-    let containerPopular = document.getElementById('movies');
-    containerPopular.innerHTML = '';
-
-    param.forEach((e) => {
-        let li = document.createElement('li');
-        let movie = document.createElement('a');
-        let image = document.createElement('img');
-        li.onclick = () => toggleFunction() //definir el id con los results para info modal y pasarlo como parametro de esta funcion
-        image.innerText = `${e.img}`
-        movie.innerText = `${e.title}`;
-        image.src = `${e.img}`;
-        containerPopular.appendChild(li);
-        li.appendChild(image);
-        li.appendChild(movie);
-    });
-    setCatTitle()
-}
-
 
 
 const printHome = (param) => {
@@ -150,6 +34,7 @@ const printHome = (param) => {
     homePopular.innerHTML = '';
     let homeTopRated = document.getElementById('homeTopRated');
     homeTopRated.innerHTML = '';
+
 
     param.forEach((e) => {
         let li = document.createElement('li');
@@ -166,52 +51,26 @@ const printHome = (param) => {
 
 }
 
-// modal
-const loadModal = (movieId) => {
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`)
-        .then(response => response.json())
-        .then(res => {
-            const mainTitleNode = document.getElementById("mainTitle")
-            mainTitleNode.innerText = res.title
-            document.getElementById("img-modal").src = `https://image.tmdb.org/t/p/w500${res.poster_path}`
-            const descriptionNode = document.getElementById("movieDescription")
-            descriptionNode.innerText = res.overview
-            const genreNode = document.getElementById("genre")
-            const genreList = []
-            res.genres.forEach(({
-                name
-            }) => genreList.push(name))
-            genreNode.innerText = genreList.join(", ")
-            const releaseDateNode = document.getElementById("releaseDate")
-            releaseDateNode.innerText = res.release_date
-        })
 
+const homePage = () => {
+    getHome('popular')
+    getHome('top_rated')
+    getHome('upcoming')
+    getHome('now_playing')
 }
-const toggleFunction = (movieId) => {
-    var modal = document.getElementById("modalContainer");
-    if (modal.style.display === "none") {
-        loadModal(movieId)
-        modal.style.display = "block";
-    } else {
-        modal.style.display = "none";
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+//FUNCION DE BUSCAR 
+/* const search = () => {
+    let searchInput = event.target.value;
+    if (searchInput.length >=3 || (event.keyCode === 13 && searchInput !== lastRequest)) {
+        lastRequest = searchInput;
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchInput}`)
+        .then(response =>  response.json())
+        .then( resSearch => console.log(resSearch.results));
     }
-}
-
-
-// Toggle hamburger
-function toggleMenu() {
-    var element = document.getElementById("hamburger");
-    element.classList.toggle("hamburger-active");
-    var element = document.getElementById("nav");
-    element.classList.toggle("nav-mobile");
-}
-
-
-
-// test busqueda
-
-
-
+}; */
 
 const clearAll = () => {
     document.getElementById("view-all").classList.add("hide")
@@ -272,6 +131,67 @@ const moreBtn = (container, category) => {
     container.parentNode.appendChild(loadMoreNode)
 }
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+//FUNCION QUE TRAE INFO DE LAS APIS Y LAS FILTRA POR LA INFO A MOSTRAR
+const getData = category => {
+
+    fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${api_key}`)
+        .then(response => response.json())
+        .then(resData => {
+            let { results } = resData
+            let movies = results.map(e => apiMovieToMovie(e))
+            printResults(movies)
+
+        });
+    
+};
+
+getData('popular')
+getData('top_rated')
+getData('upcoming')
+getData('now_playing')
+
+
+//TRAE LOS OBJETOS Y LOS FILTRO CON LA INFO QUE QUIERO MOSTRAR
+const apiMovieToMovie = apiMovie => {
+    let { title, poster_path, id } = apiMovie
+    let movie = {
+        id: id,
+        title: title,
+        img: `https://image.tmdb.org/t/p/w500/${poster_path}`
+    }
+    return movie
+}
+
+
+//FUNCIÓN QUE IMPRIME LOS RESULTADOS DE TODAS LAS CATEGORÍAS 
+const printResults = (param) => {
+    clearAll()
+    const homeContainer = document.getElementById("view-all")
+    homeContainer.classList.add("display")
+    homeContainer.classList.remove("hide")
+    let containerPopular = document.getElementById('movies');
+    containerPopular.innerHTML = '';
+
+    param.forEach((e) => {
+        let li = document.createElement('li');
+        let movie = document.createElement('a');
+        let image = document.createElement('img');
+        li.onclick = () => toggleFunction() //definir el id con los results para info modal y pasarlo como parametro de esta funcion
+        image.innerText = `${e.img}`
+        movie.innerText = `${e.title}`;
+        image.src = `${e.img}`;
+        containerPopular.appendChild(li);
+        li.appendChild(image);
+        li.appendChild(movie);
+    });
+    setCatTitle()
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//LOAD MORE BUTTON
 const loadMore = (query, currentPage) => {
     const container = document.getElementById("results")
     let url
@@ -282,3 +202,62 @@ const loadMore = (query, currentPage) => {
         .then(response => response.json())
         .then(res => addList(res.results, container))
 }
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//MODAL
+const loadModal = (movieId) => {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`)
+        .then(response => response.json())
+        .then(res => {
+            const mainTitleNode = document.getElementById("mainTitle")
+            mainTitleNode.innerText = res.title
+            document.getElementById("img-modal").src = `https://image.tmdb.org/t/p/w500${res.poster_path}`
+            const descriptionNode = document.getElementById("movieDescription")
+            descriptionNode.innerText = res.overview
+            const genreNode = document.getElementById("genre")
+            const genreList = []
+            res.genres.forEach(({
+                name
+            }) => genreList.push(name))
+            genreNode.innerText = genreList.join(", ")
+            const releaseDateNode = document.getElementById("releaseDate")
+            releaseDateNode.innerText = res.release_date
+        })
+
+}
+const toggleFunction = (movieId) => {
+    var modal = document.getElementById("modalContainer");
+    if (modal.style.display === "none") {
+        loadModal(movieId)
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
+}
+
+
+// const apiMovieToModal = apiModal => {
+//     let { id, title, img, overview, genre_ids, release_date } = apiModal
+//     let modal = {
+//         id: id,
+//         title: title,
+//         img: `https://image.tmdb.org/t/p/w500/${poster_path}`,
+//         overview: overview,
+//         genre: gendre_ids,
+//         release: release_date,
+//     }
+//     return modal
+// }
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//TOGGLE HAMBURGER
+function toggleMenu() {
+    var element = document.getElementById("hamburger");
+    element.classList.toggle("hamburger-active");
+    var element = document.getElementById("nav");
+    element.classList.toggle("nav-mobile");
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
